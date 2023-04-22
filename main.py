@@ -1,5 +1,6 @@
 import pygame
 import board
+from constants import BLUE
 
 #Initialise pygame
 pygame.init()
@@ -23,9 +24,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     #fill in the background as blue for now.
-    WIN.fill((0, 0, 255))
+    WIN.fill(BLUE)
     #draw the board onto the window
     board.draw_board(WIN, 15)
+    board.draw_pieces(WIN)
     #Update the display
     pygame.display.update()
 

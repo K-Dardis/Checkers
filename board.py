@@ -1,13 +1,20 @@
 import pygame
+from constants import *
+from piece import Piece
 
-#create the board dimensions
-COLS, ROWS = 8, 8 #common board is 8 x 8
-TILE_SIZE = 100
-WIDTH, HEIGHT = COLS * TILE_SIZE, ROWS * TILE_SIZE
+
+
+piece = Piece(1, 1, RED)
+piece2 = Piece(2, 2, BLACK)
 
 #Draw the board, at offset position
 def draw_board(win, offset):
-    pygame.draw.rect(win, (255, 255, 255), (offset, offset, WIDTH, HEIGHT))
+    pygame.draw.rect(win, WHITE, (offset, offset, WIDTH, HEIGHT))
     for row in range(ROWS):
         for col in range(row % 2, COLS, 2):
-            pygame.draw.rect(win, (0, 0, 0), (row * TILE_SIZE + offset, col * TILE_SIZE + offset,  TILE_SIZE,  TILE_SIZE))
+            pygame.draw.rect(win, BLACK, (row * TILE_SIZE + offset, col * TILE_SIZE + offset,  TILE_SIZE,  TILE_SIZE))
+
+def draw_pieces(win):
+    piece.draw(win)
+    piece2.king_piece()
+    piece2.draw(win)
