@@ -17,6 +17,9 @@ class Board():
                 pygame.draw.rect(win, BLACK, (row * TILE_SIZE + WINDOW_OFFSET, col * TILE_SIZE + WINDOW_OFFSET,  TILE_SIZE,  TILE_SIZE))
 
     def set_board(self):
+        #Remove all pieces from board
+        self.boards_pieces = []
+        #Set new pieces
         for row in range(ROWS):
                 self.boards_pieces.append([])
                 for col in range(COLS):
@@ -29,7 +32,13 @@ class Board():
                             self.boards_pieces[row].append(0)
                     else:
                         self.boards_pieces[row].append(0)
+    
+    def get_piece(self, row, col):
+        return self.boards_pieces[row][col]
 
+    def move_piece(self, piece, row, col):
+        self.boards_pieces[piece.row][piece.col], self.boards_pieces[row][col] = self.boards_pieces[row][col], self.boards_pieces[piece.row][piece.col]
+        piece.move_piece(row, col)
 
     def draw_pieces(self, win):
         for row in range(ROWS):

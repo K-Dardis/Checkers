@@ -22,3 +22,10 @@ class Piece:
             win.blit(BLACK_KING_PIECE, (self.x , self.y))
         else:
             win.blit(BLACK_PIECE, (self.x , self.y))
+
+    def move_piece(self, row, col):
+        self.row = row
+        self.col = col
+        self.x = TILE_SIZE * self.col + WINDOW_OFFSET
+        self.y = TILE_SIZE * self.row + WINDOW_OFFSET
+

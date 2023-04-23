@@ -13,7 +13,9 @@ pygame.display.set_caption(TITLE)
 pygame.display.set_icon(ICON)
 
 #create game board
-Board = Board()
+board = Board()
+piece = board.get_piece(0,1)
+board.move_piece(piece, 7, 3)
 
 #Create Game loop
 running = True
@@ -26,8 +28,8 @@ while running:
     #fill in the background as blue for now.
     WIN.fill(BLUE)
     #draw the board onto the window
-    Board.draw_board(WIN)
-    Board.draw_pieces(WIN)
+    board.draw_board(WIN)
+    board.draw_pieces(WIN)
     #Update the display
     pygame.display.update()
 
