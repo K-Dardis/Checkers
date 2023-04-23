@@ -9,6 +9,7 @@ class Game():
         self.win = win
         self.board = Board()
         self.selected_piece = None
+        self.player = RED
         
     def update(self):
         #Update the board
@@ -41,10 +42,11 @@ class Game():
 
         #Select a piece if present
         piece = self.board.get_piece(row, col)
-        if piece != 0:
-            self.selected_piece = piece
-            return True
-        
+        if piece != None and piece != 0: 
+            if piece.colour == self.player:
+                self.selected_piece = piece
+                return True
+            
         return False
     
     def _move(self, row, col):
@@ -54,6 +56,8 @@ class Game():
             #Move piece to empty tile
             if self.is_valid_move(self.selected_piece, row, col):
                 self.board.move_piece(self.selected_piece, row, col)
+                self.change_player()
+                self.selected_piece = None
                 return True
         return False
     
@@ -65,3 +69,9 @@ class Game():
             if row == piece.row + 1 and (col == piece.col + 1 or col == piece.col - 1):
                 return True
         return False
+    
+    def change_player(self):
+        if self.player == RED:
+            self.player = BLACK
+        else:
+            self.player = RED
