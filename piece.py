@@ -7,8 +7,8 @@ class Piece:
         self.col = col
         self.colour = colour
         self.king = False
-        self.x = TILE_SIZE * self.col + 15
-        self.y = TILE_SIZE * self.row + 15
+        self.x = TILE_SIZE * self.col + WINDOW_OFFSET
+        self.y = TILE_SIZE * self.row + WINDOW_OFFSET
     
     def king_piece(self):
         self.king = True

@@ -1,19 +1,19 @@
 import pygame
-import board
-from constants import BLUE
+from board import Board
+from constants import BLUE, TITLE, ICON, WIDTH, HEIGHT
 
 #Initialise pygame
 pygame.init()
 
 #Create Window
-WIN = pygame.display.set_mode((1000, 1000))
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 #Set Title and Icon
-win_title = "Checkers"
-win_icon = pygame.image.load("Resources/Images/Checkers-Logo.png")
+pygame.display.set_caption(TITLE)
+pygame.display.set_icon(ICON)
 
-pygame.display.set_caption(win_title)
-pygame.display.set_icon(win_icon)
+#create game board
+Board = Board()
 
 #Create Game loop
 running = True
@@ -26,8 +26,8 @@ while running:
     #fill in the background as blue for now.
     WIN.fill(BLUE)
     #draw the board onto the window
-    board.draw_board(WIN, 15)
-    board.draw_pieces(WIN)
+    Board.draw_board(WIN)
+    Board.draw_pieces(WIN)
     #Update the display
     pygame.display.update()
 

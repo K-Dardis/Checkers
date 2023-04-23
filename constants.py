@@ -1,9 +1,15 @@
 import pygame
 
+#create games Titl and Icon
+TITLE = "Checkers"
+ICON = pygame.image.load("Resources/Images/Checkers-Logo.png")
+
 #create the board dimensions
 COLS, ROWS = 8, 8 #common board is 8 x 8
 TILE_SIZE = 100
 WIDTH, HEIGHT = COLS * TILE_SIZE, ROWS * TILE_SIZE
+WINDOW_OFFSET = 0
+
 
 #create colours
 WHITE = (255, 255, 255)
