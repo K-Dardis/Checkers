@@ -41,6 +41,7 @@ class Board():
         piece.move_piece(row, col)
 
     def draw_pieces(self, win):
+        self.draw_board(win)
         for row in range(ROWS):
             for col in range(COLS):
                 piece = self.boards_pieces[row][col]
