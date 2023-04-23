@@ -31,7 +31,7 @@ class Board():
                         else:
                             self.boards_pieces[row].append(0)
                     else:
-                        self.boards_pieces[row].append(0)
+                        self.boards_pieces[row].append(None)
     
     def get_piece(self, row, col):
         return self.boards_pieces[row][col]
@@ -45,5 +45,5 @@ class Board():
         for row in range(ROWS):
             for col in range(COLS):
                 piece = self.boards_pieces[row][col]
-                if piece != 0:
+                if piece != 0 and piece != None:
                     piece.draw(win)
