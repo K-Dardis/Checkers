@@ -16,10 +16,12 @@ class Game():
         
         #Update the display
         pygame.display.update()
+
+    def reset(self):
+        self.board.set_board()
     
     def get_pos_on_board(self, pos):
         x, y = pos
-        
         col = (x - WINDOW_OFFSET) // TILE_SIZE
         row = (y - WINDOW_OFFSET) // TILE_SIZE
         return row, col
@@ -45,8 +47,6 @@ class Game():
         
         return False
     
-    
-
     def _move(self, row, col):
         #check if you have a selected piece and the selected tile is free
         piece = self.board.get_piece(row, col)

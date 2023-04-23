@@ -43,6 +43,8 @@ def main():
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_ESCAPE]:
             running = False
+        if key_pressed[pygame.K_r]:
+            game.reset()
         
         game.update()
 
