@@ -8,7 +8,7 @@ ICON = pygame.image.load("Resources/Images/Checkers-Logo.png")
 COLS, ROWS = 8, 8 #common board is 8 x 8
 TILE_SIZE = 100
 WIDTH, HEIGHT = COLS * TILE_SIZE, ROWS * TILE_SIZE
-WINDOW_OFFSET = 0
+WINDOW_OFFSET = 45
 
 
 #create colours

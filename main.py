@@ -6,7 +6,7 @@ from constants import BLUE, TITLE, ICON, WIDTH, HEIGHT, WINDOW_OFFSET, TILE_SIZE
 pygame.init()
 
 #Create Window
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+WIN = pygame.display.set_mode((WIDTH + 200, HEIGHT + 200))
 
 #Set Title and Icon
 pygame.display.set_caption(TITLE)
@@ -37,9 +37,7 @@ def main():
                 running = False
                     
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                row, col = get_row_and_col(pos)
-                game.select_piece(row, col)
+                game.select_tile(pygame.mouse.get_pos())
 
         #Exit if escape key is pressed
         key_pressed = pygame.key.get_pressed()
