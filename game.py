@@ -52,7 +52,16 @@ class Game():
         piece = self.board.get_piece(row, col)
         if piece == 0 and self.selected_piece:
             #Move piece to empty tile
-            self.board.move_piece(self.selected_piece, row, col)
-            return True
+            if self.is_valid_move(self.selected_piece, row, col):
+                self.board.move_piece(self.selected_piece, row, col)
+                return True
         return False
-        
+    
+    def is_valid_move(self, piece, row, col):
+        if self.selected_piece.colour == RED:
+            if row == piece.row - 1 and (col == piece.col + 1 or col == piece.col - 1):
+                return True
+        if self.selected_piece.colour == BLACK:
+            if row == piece.row + 1 and (col == piece.col + 1 or col == piece.col - 1):
+                return True
+        return False

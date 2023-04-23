@@ -25,12 +25,13 @@ class Board():
                 for col in range(COLS):
                     if col % 2 == ((row +  1) % 2):
                         if row < 3:
-                            self.boards_pieces[row].append(Piece(row, col, WHITE))
+                            self.boards_pieces[row].append(Piece(row, col, BLACK))
                         elif row > ROWS - 4:
                             self.boards_pieces[row].append(Piece(row, col, RED))
                         else:
                             self.boards_pieces[row].append(0)
                     else:
+                        #setting empty tiles that cant be used
                         self.boards_pieces[row].append(None)
     
     def get_piece(self, row, col):
