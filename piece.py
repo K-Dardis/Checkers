@@ -28,4 +28,7 @@ class Piece:
         self.col = col
         self.x = TILE_SIZE * self.col + WINDOW_OFFSET
         self.y = TILE_SIZE * self.row + WINDOW_OFFSET
+    
+    def __repr__(self):
+        return str(self.color)
 

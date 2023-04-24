@@ -6,19 +6,13 @@ from constants import BLUE, TITLE, ICON, WIDTH, HEIGHT, WINDOW_OFFSET, TILE_SIZE
 pygame.init()
 
 #Create Window
-WIN = pygame.display.set_mode((WIDTH + 200, HEIGHT + 200))
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 #Set Title and Icon
 pygame.display.set_caption(TITLE)
 pygame.display.set_icon(ICON)
 
 
-
-def get_row_and_col(pos):
-    x, y = pos
-    col = (x - WINDOW_OFFSET) // TILE_SIZE
-    row = (y - WINDOW_OFFSET) // TILE_SIZE
-    return row, col
 
 def main():
     #fill in the background as blue for now.

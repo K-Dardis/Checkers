@@ -10,41 +10,43 @@ class Game():
         self.board = Board()
         self.selected_piece = None
         self.player = RED
+        self.valid_moves = {}
         
     def update(self):
         #Update the board
         self.board.draw_pieces(self.win)
+        self.draw_moves(self.valid_moves)
         
         #Update the display
         pygame.display.update()
 
     def reset(self):
         self.board.set_board()
-    
-    def get_pos_on_board(self, pos):
-        x, y = pos
-        col = (x - WINDOW_OFFSET) // TILE_SIZE
-        row = (y - WINDOW_OFFSET) // TILE_SIZE
-        return row, col
+        self.selected_piece = None
+        self.player = RED
+        self.valid_moves = {}
 
     def select_tile(self, pos):
         #Check if have a piece selected
-        row, col = self.get_pos_on_board(pos)
+        x, y = pos
+        col = (x - WINDOW_OFFSET) // TILE_SIZE
+        row = (y - WINDOW_OFFSET) // TILE_SIZE
         if 0 <= row < ROWS and 0 <= col < COLS:
             self.select_piece(row, col)
     
     def select_piece(self, row, col):
         #Check if have a piece selected
         if self.selected_piece:
-            if not self._move(row, col):
+            result = self._move(row, col)
+            if not result:
                 self.selected_piece = None
                 self.select_piece(row, col)
 
         #Select a piece if present
         piece = self.board.get_piece(row, col)
-        if piece != None and piece != 0: 
-            if piece.colour == self.player:
+        if piece != None and piece != 0 and piece.colour == self.player:
                 self.selected_piece = piece
+                self.valid_moves = self.board.get_valid_moves(piece)
                 return True
             
         return False
@@ -52,26 +54,24 @@ class Game():
     def _move(self, row, col):
         #check if you have a selected piece and the selected tile is free
         piece = self.board.get_piece(row, col)
-        if piece == 0 and self.selected_piece:
+        if self.selected_piece and piece == 0 and (row, col) in self.valid_moves:
             #Move piece to empty tile
-            if self.is_valid_move(self.selected_piece, row, col):
-                self.board.move_piece(self.selected_piece, row, col)
-                self.change_player()
-                self.selected_piece = None
-                return True
+            self.board.move_piece(self.selected_piece, row, col)
+            skipped = self.valid_moves[(row, col)]
+            if skipped:
+                self.board.remove_piece(skipped)
+            self.change_player()
+            return True
         return False
     
-    def is_valid_move(self, piece, row, col):
-        if self.selected_piece.colour == RED:
-            if row == piece.row - 1 and (col == piece.col + 1 or col == piece.col - 1):
-                return True
-        if self.selected_piece.colour == BLACK:
-            if row == piece.row + 1 and (col == piece.col + 1 or col == piece.col - 1):
-                return True
-        return False
+    def draw_moves(self, moves):
+        for move in moves:
+            row, col = move
+            self.win.blit(BORDER, (col * TILE_SIZE + WINDOW_OFFSET, row * TILE_SIZE + WINDOW_OFFSET))
     
     def change_player(self):
-        if self.player == RED:
-            self.player = BLACK
-        else:
+        self.valid_moves = {}
+        if self.player == BLACK:
             self.player = RED
+        else:
+            self.player = BLACK
