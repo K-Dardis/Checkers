@@ -15,13 +15,14 @@ class Piece:
 
     def draw(self, win):
         if self.colour == RED:
-            if self.king == True:
-                win.blit(RED_KING_PIECE, (self.x , self.y))    
             win.blit(RED_PIECE, (self.x , self.y))
-        elif self.king == True:
-            win.blit(BLACK_KING_PIECE, (self.x , self.y))
+            if self.king == True:
+                win.blit(RED_KING_PIECE, (self.x , self.y))                    
         else:
             win.blit(BLACK_PIECE, (self.x , self.y))
+            if self.king == True:
+                win.blit(BLACK_KING_PIECE, (self.x , self.y))
+        
 
     def move_piece(self, row, col):
         self.row = row

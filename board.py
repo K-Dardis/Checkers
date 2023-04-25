@@ -7,6 +7,8 @@ class Board():
 
     def __init__(self):
         self.boards_pieces = []
+        self.red_pieces = 12
+        self.black_pieces = 12
         self.set_board()
 
     #Draw the board, at offset position
@@ -40,10 +42,17 @@ class Board():
     def move_piece(self, piece, row, col):
         self.boards_pieces[piece.row][piece.col], self.boards_pieces[row][col] = self.boards_pieces[row][col], self.boards_pieces[piece.row][piece.col]
         piece.move_piece(row, col)
+        
+        #If piece makes ot top the otherside of board they get Kinged
+        if row == ROWS - 1 or row == 0:
+            piece.king_piece()
     
     def remove_piece(self, pieces):
         for piece in pieces:
             self.boards_pieces[piece.row][piece.col] = 0
+            if piece.colour == RED:
+                self.red_pieces -= 1
+            self.black_pieces -= 1
 
     def draw_pieces(self, win):
         self.draw_board(win)
@@ -84,7 +93,7 @@ class Board():
                     moves[(row, left)] = last
                 if last:
                     if step == -1:
-                        new_stop = max(row-3, 0)
+                        new_stop = max(row-3, -1)
                     else:
                         new_stop = min(row+3, ROWS)
                     moves.update(self._check_left(row + step, new_stop, step, colour, left - 1, skipped = last))
@@ -113,7 +122,7 @@ class Board():
                     moves[(row, right)] = last
                 if last:
                     if step == -1:
-                        new_stop = max(row - 3, 0)
+                        new_stop = max(row - 3, -1)
                     else:
                         new_stop = min(row + 3, ROWS)
                     moves.update(self._check_left(row + step, new_stop, step, colour, right - 1, skipped = last))
